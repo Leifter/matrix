@@ -1,0 +1,76 @@
+#include <QCoreApplication>
+#include <QtXml>
+#include <QFile>
+#include "matrixwork.h"
+
+QDomElement contact(      QDomDocument& domDoc,
+                    const QString&      strName,
+                    const QString&      strPhone,
+                    const QString&      strEmail
+                   );
+
+QDomElement makeElement(      QDomDocument& domDoc,
+                        const QString&      strName,
+                        const QString&      strAttr = QString::null,
+                        const QString&      strText = QString::null
+                       );
+
+void makeDocument();
+
+void addDocument();
+void traverseNode(QDomDocument& domDoc, const QDomNode& node);
+
+void makeMatrix();
+QDomElement matrix(QDomDocument& domDoc, int rows, int cols, double* mat_buf);
+QDomElement makeElementMatrix(QDomDocument& domDoc, const QString& strName, int rows, int cols, double real);
+
+QTextStream cin(stdin);
+QTextStream cout(stdout);
+
+int main_test(int argc, char *argv[]);
+
+
+int main(int argc, char *argv[])
+{
+    main_test(argc, argv);
+    return 0;
+}
+
+
+
+
+int main_test(int argc, char *argv[])
+{
+    double *mat_mas_write, *mat_mas_read;
+    int rows = 10;
+    int cols = 10;
+    MatrixWork matrixWork;
+    mat_mas_write = matrixWork.genMatrix(10,10);
+    printf("Matrix generated\n");
+    //matrixWork.writeMatrix(QString("matrixout.xmcd"), mat_mas_write, rows, cols);
+    //printf("Matrix written\n");
+    mat_mas_read = matrixWork.readMatrix(QString("matrixout.xmcd"), rows, cols);
+    printf("rows = %d\n", rows);
+    printf("cols = %d\n", cols);
+    for(int i = 0; i < rows; i++)for(int j = 0; j < cols; j++)
+    {
+        double elem = *(mat_mas_read + i*rows + j);
+        printf("elem = %f, i = %d, j = %d\n", elem, i, j);
+    }
+
+
+    /*    QCoreApplication a(argc, argv);
+
+        XMLWork xmlwork;
+        return a.exec();*/
+
+        //QTextStream cout(stdout);
+
+       // makeDocument();
+        //addDocument();
+        //makeMatrix();
+        //int in;
+        //cin >> in;
+    return 0;
+}
+
